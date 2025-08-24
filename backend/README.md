@@ -46,16 +46,7 @@ cd docuchatrag
 ### 2️⃣ Setup Backend
 cd backend
 cp .env.example .env   # Add your configs here
-docker-compose build
-docker-compose up
+
 
 Django will be available at:
 👉 http://localhost:8000/api/
-
-### 3️⃣ Setup Frontend
-cd frontend
-npm install
-npm run dev
-
-Frontend will run at:
-👉 http://localhost:5173/
