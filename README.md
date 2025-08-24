@@ -14,7 +14,7 @@ The backend is powered by **Django + Django REST Framework**, the frontend is bu
   - **Option 2:** Use a local HuggingFace model (fallback if no key or API limit).
 - JWT Authentication (bonus).
 - Stores uploaded documents & Q&A history in PostgreSQL (via Django ORM).
-- Dockerized for easy deployment.
+
 
 ---
 
@@ -29,9 +29,6 @@ The backend is powered by **Django + Django REST Framework**, the frontend is bu
 - Axios for API calls
 - JWT Authentication flow
 
-**Infra**
-- Docker + docker-compose
-- Gunicorn + Nginx for production
 
 ---
 
