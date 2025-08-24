@@ -1,8 +1,34 @@
-# DocuChatRAG
-**Document Chat with Retrieval‑Augmented Generation**  
-Support for both **OpenAI** and **local LLaMA via Ollama**. DocuChatRAG enables chat-based querying of documents using a RAG approach. It supports OpenAI cloud API or local LLaMA via Ollama. Features include document chunking, vector search, prompt formatting, and fallback between models.
+📚 DocuChatRAG
+DocuChatRAG is a full-stack web application that allows users to upload documents (TXT, PDF, DOCX) and ask natural language questions about their contents.
+The backend is powered by Django + Django REST Framework, the frontend is built with React + Tailwind CSS, and the AI model integration supports OpenAI API or a local model (HuggingFace/Faiss).
 
-## Setup
+🚀 Features
+Upload a document and convert it into a searchable knowledge base.
+Ask natural language questions, get answers grounded in the uploaded file.
+Supports multiple file formats: .txt, .pdf, .docx.
+AI Integration:
+Option 1: Use OpenAI API (if API key is provided).
+Option 2: Use a local HuggingFace model (fallback if no key or API limit).
+JWT Authentication (bonus).
+Stores uploaded documents & Q&A history in PostgreSQL (via Django ORM).
+Dockerized for easy deployment.
+🛠️ Tech Stack
+Backend
+
+Django + Django REST Framework
+PostgreSQL (can switch to SQLite for dev)
+LangChain + HuggingFace + OpenAI API
+Frontend
+
+React (Vite) + Tailwind CSS
+Axios for API calls
+JWT Authentication flow
+Infra
+
+Docker + docker-compose
+Gunicorn + Nginx for production
+⚡ Getting Started
+
 **Prerequisites:** Python 3.10+, pip, Git, Ollama (optional for local model).  
 Clone the repo:  
 ```bash
