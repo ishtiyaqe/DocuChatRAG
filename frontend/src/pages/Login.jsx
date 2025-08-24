@@ -1,35 +1,18 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // <-- use login from AuthContext
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Try JWT login
-      const res = await axios.post("http://localhost:8000/api/auth/jwt/login/", {
-        username,
-        password,
-      });
-
-      if (res.data.access) {
-        localStorage.setItem("access_token", res.data.access);
-        localStorage.setItem("refresh_token", res.data.refresh);
-        navigate("/");
-        return;
-      }
-
-      // If no JWT, fallback to session login
-      await axios.post(
-        "http://localhost:8000/api/auth/session-login/",
-        { username, password },
-        { withCredentials: true }
-      );
-      navigate("/");
+      await login({ username, password }); // <-- this updates AuthContext
+      navigate("/"); // redirect after login
     } catch (err) {
       alert("Invalid login");
     }

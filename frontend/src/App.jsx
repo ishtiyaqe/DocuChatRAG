@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DocumentUpload from "./components/DocumentUpload";
 import QuestionAnswer from "./components/QuestionAnswer";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 

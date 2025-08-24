@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import clients from "../api/clients";
 
 function QuestionAnswer({ docId }) {
   const [question, setQuestion] = useState("");
@@ -8,42 +8,46 @@ function QuestionAnswer({ docId }) {
 
   const handleAsk = async () => {
     if (!question.trim()) return;
-    setLoading(true);
 
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/ask/", {
-        doc_id: docId,
-        question: question,
-      });
-      setAnswer(response.data.answer);
-    } catch (error) {
-      console.error(error);
-      alert("Failed to get answer");
+      const response = await clients.post(
+        `api/ask/${docId}/`,
+        { question },
+        {
+        withCredentials: true,
+        }
+      );
+      setAnswer(response.data.answer); // response should have answer from backend
+    } catch (err) {
+      console.error(err);
+      alert("Error getting answer");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-2xl">
+    <div className="bg-white p-6 shadow-lg rounded w-96 mt-6">
       <h2 className="text-xl font-semibold mb-4">Ask a Question</h2>
-      <textarea
+      <input
+        type="text"
+        placeholder="Type your question..."
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Type your question here..."
-        className="w-full border rounded-lg p-3 mb-4"
+        className="border p-2 w-full mb-3 rounded"
       />
       <button
         onClick={handleAsk}
         disabled={loading}
-        className="bg-indigo-600 text-white px-4 py-2 rounded-xl hover:bg-indigo-700 disabled:bg-gray-400"
+        className="bg-indigo-600 text-white px-4 py-2 rounded w-full"
       >
-        {loading ? "Thinking..." : "Ask"}
+        {loading ? "Loading..." : "Ask"}
       </button>
 
       {answer && (
-        <div className="mt-6 p-4 bg-gray-100 rounded-lg">
-          <h3 className="font-semibold mb-2">Answer:</h3>
+        <div className="mt-4 p-3 border rounded bg-gray-50">
+          <h3 className="font-semibold mb-2">AI Answer:</h3>
           <p>{answer}</p>
         </div>
       )}
