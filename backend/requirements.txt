@@ -12,3 +12,4 @@ sentence-transformers==3.0.1
 torch
 requests==2.32.3
 openai==1.35.7
+django-jazzmin
